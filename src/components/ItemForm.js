@@ -32,6 +32,7 @@ export default class ItemForm extends React.Component {
     }
 
     handleSubmit=(event)=>{   
+        event.preventDefault();
         console.log(this.props._id)
         if(this.props._id !== undefined){
             this.updateThing(this.state)
