@@ -3,7 +3,7 @@
 // or a blank form. when submitted it needs 
 // to either put or post the data to the api
 import React from 'react'
-import { newItem, updateItem }from '../store/ApiCalls'
+import { newItem, updateItem, deleteItem }from '../store/ApiCalls'
 
 
 
@@ -52,6 +52,14 @@ export default class ItemForm extends React.Component {
         console.log(newThing)
         return newItem 
     }
+    removeItem=(event)=>{
+        event.preventDefault();
+        console.log(this.state._id)
+        const id= this.state._id
+        
+        const remove = deleteItem(id)
+        console.log(remove)
+    }
 
 
     render(){
@@ -73,7 +81,7 @@ export default class ItemForm extends React.Component {
                 {this.state.description}
                 <br/>
                 <button type="submit">Done Editing</button>
-                
+                <button onClick={this.removeItem}>Delete</button>
             </form>
         )
     }

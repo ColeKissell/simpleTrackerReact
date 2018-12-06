@@ -15,7 +15,7 @@ class ListofItems extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            things : []
+            thingsId: []
         }
         
     }
@@ -27,16 +27,19 @@ class ListofItems extends React.Component {
         .then((myJson)=> {
             return myJson
         });
-        
-        this.setState({things: items})
-    }
 
-getAllThings=async()=>{
-    const items = await getThings();
-    this.setState(
-        {things: items}
-    )
-}
+        const ids = this.mapItemsId(items)
+        this.setState({thingsId: ids})
+    }
+    mapItemsId(data){
+        const result = data.map((datum)=>{const wanted = datum._id; return wanted})
+        return result
+    }
+    getAllThings=async()=>{
+        const items = await getThings();
+        const data = this.mapItemsId(items);
+        this.setState({thingsId: data})
+    }
 
     render(){
         return(
@@ -44,12 +47,10 @@ getAllThings=async()=>{
                 <button onClick={this.getAllThings}>get stuff</button>
                 
                 <ul>
-                    {this.state.things.map((thing, i )=>{
+                    {this.state.thingsId.map((thingId, i )=>{
                         return <li key={i}>
                             <SingleItem 
-                                _id={this.state.things[i]._id} 
-                                name={this.state.things[i].name} 
-                                description={this.state.things[i].description}
+                                _id={this.state.thingsId[i]} 
                             ></SingleItem>
                         </li>
                     })}
