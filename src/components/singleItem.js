@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ItemForm from './ItemForm';
 import { getThingsByID }from '../store/ApiCalls'
 // this component displayed all of details of the item in the database.
@@ -9,20 +9,24 @@ export default class SingleItem extends React.Component {
             this.state={
                 _id: this.props._id,
                 name: '',
-                description: ''
+                description: '',
+                edit: false
             }
     }
     
     async componentDidMount(){
         const myId = this.props._id
         const thing = await getThingsByID(myId)
-        console.log(thing)
         this.setState({
             _id: this.props._id,
             name: thing.name,
             description: thing.description
         })
-        console.log(this.state)
+    }
+
+    editClick=(e)=>{
+        e.preventDefault();
+        this.setState({edit: !this.state.edit})
     }
     
     render() {
@@ -35,15 +39,16 @@ export default class SingleItem extends React.Component {
                     <br/>
                     {this.state.description}
                     <br/>
-                    
-                    <br/>
-                    <ItemForm 
-                        _id={this.props._id} 
-                        name={this.state.name}
-                        description={this.state.description}
-                    ></ItemForm>
-                        <br/>
-                    
+                        <button onClick={this.editClick}>Edit</button>
+                        {this.state.edit ?
+                            <ItemForm 
+                            my_id={this.state._id} 
+                            myName={this.state.name}
+                            myDescription={this.state.description}
+                        ></ItemForm> : 
+                        <Fragment></Fragment>
+                        }
+
                     <hr/>
 
                 </span>

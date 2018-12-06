@@ -10,20 +10,23 @@ import { newItem, updateItem, deleteItem }from '../store/ApiCalls'
 export default class ItemForm extends React.Component {
     constructor(props){
         super(props)
-        if(props){
+
+        if(this.props._id === undefined){
             this.state={
-                _id: this.props._id,
-                name: this.props.name,
-                description: this.props.description
+                _id: this.props.my_id,
+                name: this.props.myName,
+                description: this.props.myDescription
             }
-        }else {
+        }else{
             this.state={
                 _id: '',
                 name: '',
                 description: ''
             }
         }
+        console.log(this.state)
     }
+
     updateName=(event)=>{
         this.setState({name: event.target.value});
     }
@@ -33,7 +36,6 @@ export default class ItemForm extends React.Component {
 
     handleSubmit=(event)=>{   
         event.preventDefault();
-        console.log(this.props._id)
         if(this.props._id !== undefined){
             this.updateThing(this.state)
         }else{
@@ -43,22 +45,18 @@ export default class ItemForm extends React.Component {
 
     submitNew=()=>{
         const newThing = newItem(this.state)
-        console.log(newThing)
-        return newItem 
+        return newThing 
     }
 
     updateThing=()=>{
         const newThing = updateItem(this.state)
-        console.log(newThing)
-        return newItem 
+        return newThing
     }
     removeItem=(event)=>{
         event.preventDefault();
-        console.log(this.state._id)
-        const id= this.state._id
-        
+        const id= this.state._id;
         const remove = deleteItem(id)
-        console.log(remove)
+        return remove
     }
 
 
@@ -66,6 +64,7 @@ export default class ItemForm extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 {this.state._id}
+                <br/>
                 <label>Name</label>
                 <input  
                     defaultValue={this.state.name} 

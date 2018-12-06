@@ -20,7 +20,7 @@ const getThingsByID=async (_id)=>{
         'Content-type': 'application/json; charset=UTF-8'
       }
     }
-  )  .then((response)=> {
+  ).then((response)=> {
     return response.json();
   })
   .then((myJson)=> {
@@ -39,11 +39,10 @@ const newItem = async (data) => {
       },
       body: JSON.stringify(data)
     }
-  ).catch((err)=>{console.log(err)})
+  ).then((result)=>{console.log(result)}).catch((err)=>{console.log(err)})
   return things;
 }
 const updateItem = async (data) => {
-  console.log(data)
   const things = await fetch(`${url}/${data._id}`, 
     {
       method: 'PUT',
@@ -53,7 +52,7 @@ const updateItem = async (data) => {
       },
       body: JSON.stringify(data)
     }
-  ).catch((err)=>{console.log(err)})
+  ).then((result)=>{console.log(result)}).catch((err)=>{console.log(err)})
   return things;
 }
 const deleteItem = async (_id) => {
@@ -62,7 +61,7 @@ const deleteItem = async (_id) => {
     method: 'DELETE',
     cors: true
   }
-).catch((err)=>{console.log(err)})
+).then((result)=>{console.log(`${result} item deleted`)}).catch((err)=>{console.log(err)})
 return things;
 }
 export {
