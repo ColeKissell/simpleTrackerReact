@@ -10,7 +10,7 @@ import { newItem, updateItem, deleteItem }from '../store/ApiCalls'
 export default class ItemForm extends React.Component {
     constructor(props){
         super(props)
-
+        console.log(this.props._id)
         if(this.props._id === undefined){
             this.state={
                 _id: this.props.my_id,
@@ -24,7 +24,6 @@ export default class ItemForm extends React.Component {
                 description: ''
             }
         }
-        console.log(this.state)
     }
 
     updateName=(event)=>{
@@ -34,12 +33,13 @@ export default class ItemForm extends React.Component {
         this.setState({description: event.target.value});
     }
 
-    handleSubmit=(event)=>{   
+    handleSubmit=(event)=>{
+        console.log(this.props._id)   
         event.preventDefault();
-        if(this.props._id !== undefined){
+        if(this.props.my_id){
             this.updateThing(this.state)
         }else{
-            this.submitNew()
+            this.submitNew(this.state)
         }
     }
 
