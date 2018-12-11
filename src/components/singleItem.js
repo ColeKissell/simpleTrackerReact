@@ -1,17 +1,20 @@
 import React, { Fragment } from 'react';
 import ItemForm from './ItemForm';
-import { getThingsByID }from '../store/ApiCalls'
-// this component displayed all of details of the item in the database.
-// it will need to recieve data from another component 
+import { getThingsByID } from '../store/ApiCalls'
+import ItemCard from './ItemCard'
+
+
+
 export default class SingleItem extends React.Component {
     constructor(props){
         super(props)
             this.state={
                 _id: this.props._id,
-                name: '',
-                description: '',
+                name: [],
+                description: [],
                 edit: false
             }
+            
     }
     
     async componentDidMount(){
@@ -20,7 +23,7 @@ export default class SingleItem extends React.Component {
         this.setState({
             _id: this.props._id,
             name: thing.name,
-            description: thing.description
+            description: thing.description,
         })
     }
 
@@ -33,24 +36,21 @@ export default class SingleItem extends React.Component {
         return (
             <div>
                 <span>
-                    {this.props._id}
-                    <br/>
-                    {this.state.name}
-                    <br/>
-                    {this.state.description}
-                    <br/>
+                    <ItemCard
+                        _id= {this.props._id}
+                        name = {this.state.name}
+                        description = {this.state.description}
+                    ></ItemCard>
+
                         <button onClick={this.editClick}>Edit</button>
                         {this.state.edit ?
                             <ItemForm 
-                            my_id={this.state._id} 
-                            myName={this.state.name}
-                            myDescription={this.state.description}
-                        ></ItemForm> : 
-                        <Fragment></Fragment>
+                                my_id={this.state._id} 
+                                myName={this.state.name}
+                                myDescription={this.state.description}
+                            ></ItemForm> : 
+                            <Fragment></Fragment>
                         }
-
-                    <hr/>
-
                 </span>
             </div>
         )

@@ -4,14 +4,13 @@
 // to either put or post the data to the api
 import React from 'react'
 import { newItem, updateItem, deleteItem }from '../store/ApiCalls'
-
+import Button from '@material-ui/core/Button';
 
 
 export default class ItemForm extends React.Component {
     constructor(props){
         super(props)
-        console.log(this.props._id)
-        if(this.props._id === undefined){
+        if(this.props._id !== undefined){
             this.state={
                 _id: this.props.my_id,
                 name: this.props.myName,
@@ -67,20 +66,20 @@ export default class ItemForm extends React.Component {
                 <br/>
                 <label>Name</label>
                 <input  
-                    defaultValue={this.state.name} 
+                    defaultValue={this.props.myName} 
                     onChange={this.updateName}
                 />
                 {this.state.name}
                 <br/>
                 <label>Description</label>
                 <input 
-                    defaultValue={this.state.description} 
+                    defaultValue={this.props.myDescription} 
                     onChange={this.updateDescription}  
                 />
                 {this.state.description}
                 <br/>
-                <button type="submit">Done Editing</button>
-                <button onClick={this.removeItem}>Delete</button>
+                <Button variant='contained' color='primary' type="submit">Done Editing</Button>
+                <Button variant='contained' color='secondary' onClick={this.removeItem}>Delete</Button>
             </form>
         )
     }
