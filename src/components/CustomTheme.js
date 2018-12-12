@@ -16,7 +16,14 @@ const customTheme = createMuiTheme({
     },
     typography:{
         useNextVariants: true,
-    }
+    },
+    // overrides:{
+    //     MuiPaper:{
+    //         root:{
+    //             backgroundColor: '#002884'
+    //         }
+    //     }
+    // }
   });
 
 export default customTheme

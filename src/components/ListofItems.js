@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 // import { GridListTileBar } from '@material-ui/core';
 // import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
-
+import Button from '@material-ui/core/Button';
 
 
 const styles = theme => ({
@@ -36,7 +36,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 2,
         height: '100%',
         color: theme.palette.text.secondary,
-        backgroundColor: theme.palette.primary,
+        backgroundColor: 'primary',
         marginBottom: theme.spacing.unit,
         },
     gridItem: {
@@ -91,10 +91,10 @@ class ListofItems extends React.Component {
         const { classes } = this.props;
         return(
             <div>
-                
-                
-                {/* <Grid container justify="center" spacing={8} className={classes.container}> */}
-                        <button onClick={this.getAllThings}>get stuff</button>
+                        <Paper>
+                            <Button variant='contained' color='primary' onClick={this.getAllThings}>get stuff</Button>
+                        </Paper>
+                        
                         <Grid container justify="center" spacing={16}>
                         {this.state.thingsId.map((thingId, i )=>{
                             return <Grid key={i} item>
@@ -109,6 +109,7 @@ class ListofItems extends React.Component {
                             </Grid>
                         })}
                         </Grid>
+                        <hr/>
                     <Paper>
                         <Typography variant='h6'>New Item</Typography>
                     <ItemForm></ItemForm>
