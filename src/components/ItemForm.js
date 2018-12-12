@@ -39,7 +39,7 @@ export default class ItemForm extends React.Component {
     updateMessage = (newMessage) => {
         this.setState({
             displaymessage: true,
-            message: `result: ${newMessage}`
+            message: `${newMessage}`
         })
     }
 
@@ -50,24 +50,43 @@ export default class ItemForm extends React.Component {
         }else{
             this.submitNew(this.state)
         }
+        this.setState({
+            _id: '',
+            name: '',
+            description: '',
+        })
     }
 
     submitNew=async()=>{
         const newThing = await newItem(this.state)
         this.updateMessage('item created')
+        this.setState({
+            _id: '',
+            name: '',
+            description: '',
+        })
         
     }
 
     updateThing=async()=>{
         const newThing = await updateItem(this.state)
         this.updateMessage('item updated')
+        this.setState({
+            _id: '',
+            name: '',
+            description: '',
+        })
     }
     removeItem=(event)=>{
         event.preventDefault();
         const id= this.state._id;
         const remove = deleteItem(id)
         this.updateMessage('item removed')
-        return  remove
+        this.setState({
+            _id: '',
+            name: '',
+            description: '',
+        })
     }
 
 
