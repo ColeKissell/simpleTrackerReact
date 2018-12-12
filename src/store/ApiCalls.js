@@ -15,7 +15,7 @@ const getThings=async ()=>{
 const getThingsByID=async (_id)=>{
   const thing = await fetch(`${url}/detail/${_id}`, 
     {
-      method: 'get',
+      method: 'GET',
       cors: true,
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -34,7 +34,7 @@ const searchByName =async (query)=>{
   query = query.toLowerCase().replace(/' '/g, /[+]/)
   const result = await fetch(`${url}/search/${query}`, 
     {
-      method: 'get',
+      method: 'GET',
       cors: true,
       headers: {
         'Content-type': 'application/json; charset=UTF-8'
@@ -52,7 +52,7 @@ const searchByName =async (query)=>{
 const newItem = async (data) => {
   const things = await fetch(`${url}/new`, 
     {
-      method: 'post',
+      method: 'POST',
       cors: true,
       headers: {
         'Content-type': 'application/json; charset=UTF-8'

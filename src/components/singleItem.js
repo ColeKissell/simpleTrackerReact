@@ -10,8 +10,8 @@ export default class SingleItem extends React.Component {
         super(props)
             this.state={
                 _id: this.props._id,
-                name: [],
-                description: [],
+                name: '',
+                description: '',
                 edit: false
             }
             

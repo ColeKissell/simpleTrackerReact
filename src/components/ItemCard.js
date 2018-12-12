@@ -43,6 +43,7 @@ expandOpen: {
 
 
 class ItemCard extends React.Component {
+    
 state = { expanded: false };
 
 handleExpandClick = () => {
@@ -79,7 +80,11 @@ render() {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         <CardContent>
-            <ItemForm></ItemForm>
+            <ItemForm
+                my_id={this.state._id} 
+                myName={this.state.name}
+                myDescription={this.state.description}
+            ></ItemForm>
         </CardContent>
         </Collapse>
     </Card>

@@ -59,7 +59,7 @@ class ListofItems extends React.Component {
         const items = await fetch('https://nowhapi-t1e1gfktt.now.sh/item')
                     .then((response)=> {return response.json();})
                     .then((myJson)=> {return myJson}).catch(err =>console.log(err))
-            if(items){
+            if(items!== undefined){
                 const ids = this.mapItemsId(items)
                 this.setState({thingsId: ids,
                 loaded: true})

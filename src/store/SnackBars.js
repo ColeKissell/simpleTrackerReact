@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -13,10 +13,18 @@ const styles = theme => ({
 });
 
 class MySnackbar extends React.Component {
+    
     state = {
-        message: this.props.message,
-        open: false,
+        mymessage: '',
+        open: false
     };
+
+    componentDidMount(){
+        this.setState({
+            mymessage: this.props.message,
+            open: this.props.open
+        })
+    }
 
     handleClick = () => {
         this.setState({ open: true });
@@ -25,10 +33,10 @@ class MySnackbar extends React.Component {
     handleClose = (event, reason) => {
         if (reason === 'clickaway') {
         return;
-    }
+        }
 
-    this.setState({ open: false });
-};
+        this.setState({ open: false });
+    };
 
     render() {
         const { classes } = this.props;
@@ -36,8 +44,8 @@ class MySnackbar extends React.Component {
         <div>
             <Snackbar
             anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'center',
             }}
             open={this.state.open}
             autoHideDuration={6000}
@@ -45,11 +53,8 @@ class MySnackbar extends React.Component {
             ContentProps={{
                 'aria-describedby': 'message-id',
             }}
-            message={<span id="message-id">{this.state.message}</span>}
+            message={<span id="message-id">{this.state.mymessage}</span>}
             action={[
-                <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
-                UNDO
-                </Button>,
                 <IconButton
                     key="close"
                     aria-label="Close"
