@@ -92,7 +92,8 @@ class ListofItems extends React.Component {
         return(
             <div>
                         <Paper>
-                            <Button variant='contained' color='primary' onClick={this.getAllThings}>get stuff</Button>
+                            {/* <Button variant='contained' color='primary' onClick={this.getAllThings}>get stuff</Button> */}
+                            <Typography variant='h6'>Here is a simple application to track the name and description of anything you want</Typography>
                         </Paper>
                         
                         <Grid container justify="center" spacing={16}>

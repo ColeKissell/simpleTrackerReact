@@ -87,6 +87,7 @@ export default class ItemForm extends React.Component {
             name: '',
             description: '',
         })
+        
     }
 
     submitNew=async()=>{
@@ -97,7 +98,7 @@ export default class ItemForm extends React.Component {
             name: '',
             description: '',
         })
-        
+        await window.location.reload();
     }
 
     updateThing=async()=>{
@@ -108,17 +109,19 @@ export default class ItemForm extends React.Component {
             name: '',
             description: '',
         })
+        await window.location.reload();
     }
-    removeItem=(event)=>{
+    removeItem=async(event)=>{
         event.preventDefault();
         const id= this.state._id;
-        const remove = deleteItem(id)
+        const remove = await deleteItem(id)
         this.updateMessage('item removed')
         this.setState({
             _id: '',
             name: '',
             description: '',
         })
+        await window.location.reload();
     }
 
 
